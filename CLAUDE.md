@@ -99,4 +99,19 @@ npm test               # roda os testes com Vitest
 ```
 
 ## Status Atual
-MVP implementado. Frontend conectado ao backend Java local.
+MVP implementado e commitado no GitHub (`arthurnorat/home-budget-web`).
+Frontend conectado ao backend Java local (dev) e ao Render (produção futura).
+
+### Sessão 2026-04-25
+**O que foi feito:**
+- Criado CLAUDE.md com documentação do projeto
+- Criados models (`expense.model.ts`) e service (`expense.service.ts`)
+- Configurado `provideHttpClient` no `app.config.ts`
+- Implementados os quatro componentes: `month-navigator`, `expense-summary`, `expense-form`, `expense-table`
+- Integração no `app.ts` com signals e chamadas ao service
+- Layout e estilos CSS (sem biblioteca de UI)
+
+**Próxima sessão:**
+1. Responsividade para mobile (media queries — o formulário em grid de 5 colunas quebra no celular)
+2. Deploy do frontend no Vercel (conectar ao repositório `home-budget-web`)
+3. Após o deploy: apontar a URL do Vercel no CORS do backend Java e fazer redeploy no Render
