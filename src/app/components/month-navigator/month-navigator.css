@@ -1,0 +1,27 @@
+.month-navigator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.month-navigator span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  min-width: 160px;
+  text-align: center;
+}
+
+.month-navigator button {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.month-navigator button:hover {
+  background: #f0f0f0;
+}

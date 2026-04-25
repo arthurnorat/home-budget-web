@@ -1,0 +1,38 @@
+@if (expenses().length === 0) {
+  <p class="empty-state">Nenhum gasto registrado neste mês.</p>
+} @else {
+  <table class="expense-table">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Data</th>
+        <th>Categoria</th>
+        <th>Valor</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (expense of expenses(); track expense.expenseId) {
+        <tr>
+          <td>{{ expense.description }}</td>
+          <td>{{ formatDate(expense.date) }}</td>
+          <td>
+            <span
+              class="badge"
+              [class.badge-fixed]="expense.category === 'FIXED'"
+              [class.badge-variable]="expense.category === 'VARIABLE'"
+            >{{ formatCategory(expense.category) }}</span>
+          </td>
+          <td class="amount">{{ formatCents(expense.amount) }}</td>
+          <td>
+            <button
+              class="btn-delete"
+              (click)="onDelete(expense.expenseId)"
+              aria-label="Excluir gasto"
+            >&#x2715;</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

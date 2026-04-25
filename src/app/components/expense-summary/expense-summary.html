@@ -1,0 +1,16 @@
+<div class="summary">
+  <div class="summary-total">
+    <span class="summary-label">Total do mês</span>
+    <span class="summary-value">{{ formatCents(total()) }}</span>
+  </div>
+  <div class="summary-categories">
+    <div class="summary-category">
+      <span class="summary-label">Fixo</span>
+      <span class="summary-value">{{ formatCents(totalFixed()) }}</span>
+    </div>
+    <div class="summary-category">
+      <span class="summary-label">Variável</span>
+      <span class="summary-value">{{ formatCents(totalVariable()) }}</span>
+    </div>
+  </div>
+</div>

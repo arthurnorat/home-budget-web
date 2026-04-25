@@ -1,12 +1,60 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, signal, inject, OnInit } from '@angular/core';
+import { ExpenseService } from './services/expense.service';
+import { Expense, ExpenseRequest } from './models/expense.model';
+import { MonthNavigator } from './components/month-navigator/month-navigator';
+import { ExpenseForm } from './components/expense-form/expense-form';
+import { ExpenseSummary } from './components/expense-summary/expense-summary';
+import { ExpenseTable } from './components/expense-table/expense-table';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [MonthNavigator, ExpenseForm, ExpenseSummary, ExpenseTable],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('home-budget-app');
+export class App implements OnInit {
+  private expenseService = inject(ExpenseService);
+
+  currentMonth = signal(this.todayYearMonth());
+  expenses = signal<Expense[]>([]);
+  loading = signal(false);
+
+  ngOnInit(): void {
+    this.loadExpenses();
+  }
+
+  onMonthChange(month: string): void {
+    this.currentMonth.set(month);
+    this.loadExpenses();
+  }
+
+  onExpenseSubmit(request: ExpenseRequest): void {
+    this.expenseService.createExpense(request).subscribe({
+      next: () => this.loadExpenses(),
+    });
+  }
+
+  onDeleteExpense(id: string): void {
+    this.expenseService.deleteExpense(id).subscribe({
+      next: () => this.loadExpenses(),
+    });
+  }
+
+  private loadExpenses(): void {
+    this.loading.set(true);
+    this.expenseService.getExpenses(this.currentMonth()).subscribe({
+      next: (data) => {
+        this.expenses.set(data);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false),
+    });
+  }
+
+  private todayYearMonth(): string {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    return `${y}-${m}`;
+  }
 }
