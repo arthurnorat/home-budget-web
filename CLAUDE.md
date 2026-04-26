@@ -99,8 +99,10 @@ npm test               # roda os testes com Vitest
 ```
 
 ## Status Atual
-MVP implementado e commitado no GitHub (`arthurnorat/home-budget-web`).
-Frontend conectado ao backend Java local (dev) e ao Render (produção futura).
+App em produção completo. Frontend no Vercel, backend no Render.
+
+- **Frontend:** `https://home-budget-web-ten.vercel.app/`
+- **Backend:** `https://home-budget-api-wml2.onrender.com`
 
 ### Sessão 2026-04-25
 **O que foi feito:**
@@ -111,7 +113,17 @@ Frontend conectado ao backend Java local (dev) e ao Render (produção futura).
 - Integração no `app.ts` com signals e chamadas ao service
 - Layout e estilos CSS (sem biblioteca de UI)
 
+### Sessão 2026-04-26
+**O que foi feito:**
+- Criados arquivos de ambiente (`src/environments/environment.ts` e `environment.prod.ts`)
+- Service atualizado para usar `environment.apiUrl` (dev aponta para localhost, prod aponta para Render)
+- `angular.json`: `outputMode` trocado de `server` para `static` (compatível com Vercel)
+- `fileReplacements` configurado no build de produção para trocar o environment automaticamente
+- Guard `isPlatformBrowser` adicionado em `app.ts` para não chamar a API durante o prerender
+- `vercel.json` criado com rewrite SPA (`/* → /index.html`)
+- Deploy realizado no Vercel (auto-deploy via push no GitHub)
+- CORS do backend Java atualizado com a URL do Vercel e redeploy no Render
+
 **Próxima sessão:**
 1. Responsividade para mobile (media queries — o formulário em grid de 5 colunas quebra no celular)
-2. Deploy do frontend no Vercel (conectar ao repositório `home-budget-web`)
-3. Após o deploy: apontar a URL do Vercel no CORS do backend Java e fazer redeploy no Render
+2. Edição de gasto existente (`PUT /expenses/{id}` no backend + UI no frontend)
