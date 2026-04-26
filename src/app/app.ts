@@ -1,4 +1,5 @@
-import { Component, signal, inject, OnInit } from '@angular/core';
+import { Component, signal, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ExpenseService } from './services/expense.service';
 import { Expense, ExpenseRequest } from './models/expense.model';
 import { MonthNavigator } from './components/month-navigator/month-navigator';
@@ -14,13 +15,16 @@ import { ExpenseTable } from './components/expense-table/expense-table';
 })
 export class App implements OnInit {
   private expenseService = inject(ExpenseService);
+  private platformId = inject(PLATFORM_ID);
 
   currentMonth = signal(this.todayYearMonth());
   expenses = signal<Expense[]>([]);
   loading = signal(false);
 
   ngOnInit(): void {
-    this.loadExpenses();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadExpenses();
+    }
   }
 
   onMonthChange(month: string): void {
