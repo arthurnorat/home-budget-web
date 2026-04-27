@@ -124,6 +124,8 @@ App em produção completo. Frontend no Vercel, backend no Render.
 - Deploy realizado no Vercel (auto-deploy via push no GitHub)
 - CORS do backend Java atualizado com a URL do Vercel e redeploy no Render
 
-**Próxima sessão:**
-1. Responsividade para mobile (media queries — o formulário em grid de 5 colunas quebra no celular)
-2. Edição de gasto existente (`PUT /expenses/{id}` no backend + UI no frontend)
+**Próxima sessão (ordem de execução):**
+1. Renomear o diretório do backend: `~/Java_Projects/orcamento` → `~/Java_Projects/home-budget-api`
+2. Atualizar este CLAUDE.md com o novo caminho do backend
+3. Responsividade para mobile (media queries — o formulário em grid de 5 colunas quebra no celular)
+4. Edição de gasto existente (`PUT /expenses/{id}` no backend + UI no frontend)
