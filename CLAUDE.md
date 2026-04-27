@@ -17,7 +17,7 @@ Consome a API REST Java hospedada no backend.
 - **CSS puro** — sem biblioteca de UI por enquanto
 - **Vercel** — hospedagem
 
-### Backend (projeto separado: `~/Java_Projects/orcamento`)
+### Backend (projeto separado: `~/Java_Projects/home-budget-api`)
 - **Java + Spring Boot** — API REST na porta 8080
 - **PostgreSQL** — banco de dados em produção
 - **Render** — hospedagem do backend
@@ -126,5 +126,4 @@ App em produção completo. Frontend no Vercel, backend no Render.
 
 **Próxima sessão:**
 1. Responsividade para mobile (media queries — o formulário em grid de 5 colunas quebra no celular)
-2. Atualizar referência ao diretório do backend (de `~/Java_Projects/orcamento` para `~/Java_Projects/home-budget-api`) após o rename
-3. Edição de gasto existente (`PUT /expenses/{id}` no backend + UI no frontend)
+2. Edição de gasto existente (`PUT /expenses/{id}` no backend + UI no frontend)
