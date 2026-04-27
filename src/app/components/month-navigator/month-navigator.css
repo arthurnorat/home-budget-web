@@ -25,3 +25,14 @@
 .month-navigator button:hover {
   background: #f0f0f0;
 }
+
+@media (max-width: 600px) {
+  .month-navigator span {
+    min-width: 120px;
+  }
+
+  .month-navigator button {
+    min-height: 44px;
+    padding: 0.25rem 1rem;
+  }
+}

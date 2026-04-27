@@ -41,3 +41,16 @@
   font-size: 1.5rem;
   color: #0d6efd;
 }
+
+@media (max-width: 600px) {
+  .summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .summary-categories {
+    border-left: none;
+    padding-left: 0;
+  }
+}
