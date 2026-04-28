@@ -124,6 +124,15 @@ App em produção completo. Frontend no Vercel, backend no Render.
 - Deploy realizado no Vercel (auto-deploy via push no GitHub)
 - CORS do backend Java atualizado com a URL do Vercel e redeploy no Render
 
+### Sessão 2026-04-27
+**O que foi feito:**
+- Media queries adicionadas em `app.css`, `expense-form.css`, `expense-summary.css` e `month-navigator.css`
+- Formulário: desktop (5 colunas) → tablet ≤900px (2 colunas) → mobile ≤600px (1 coluna)
+- Resumo: empilhado em coluna no mobile, `border-left` removido
+- Tabela: scroll horizontal via `overflow-x: auto` no `.card`
+- Inputs com `font-size: 1rem` no mobile (evita zoom automático do iOS)
+- Botões do navegador de mês com `min-height: 44px` para touch
+
 **Próxima sessão:**
-1. Responsividade para mobile (media queries — o formulário em grid de 5 colunas quebra no celular)
-2. Edição de gasto existente (`PUT /expenses/{id}` no backend + UI no frontend)
+1. Edição de gasto existente (`PUT /expenses/{id}` no backend + UI inline na tabela ou modal no frontend)
+2. Filtro por categoria na tabela (só frontend, sem backend)
