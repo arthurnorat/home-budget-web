@@ -37,6 +37,12 @@ input:focus, select:focus {
   color: #dc3545;
 }
 
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
 .btn-submit {
   padding: 0.5rem 1.25rem;
   background: #0d6efd;
@@ -57,13 +63,30 @@ input:focus, select:focus {
   cursor: not-allowed;
 }
 
+.btn-cancel {
+  padding: 0.5rem 1.25rem;
+  background: none;
+  color: #6c757d;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-cancel:hover {
+  background: #f8f9fa;
+  color: #495057;
+}
+
 @media (max-width: 900px) {
   .expense-form {
     grid-template-columns: 1fr 1fr;
   }
 
-  .btn-submit {
+  .form-actions {
     grid-column: 1 / -1;
+    flex-direction: row;
   }
 }
 
@@ -76,8 +99,14 @@ input:focus, select:focus {
     font-size: 1rem;
   }
 
-  .btn-submit {
+  .form-actions {
     grid-column: 1;
+    flex-direction: row;
+  }
+
+  .btn-submit,
+  .btn-cancel {
     padding: 0.75rem 1.25rem;
+    flex: 1;
   }
 }

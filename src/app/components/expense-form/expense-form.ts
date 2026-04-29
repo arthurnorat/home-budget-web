@@ -1,6 +1,6 @@
-import { Component, output, inject } from '@angular/core';
+import { Component, output, input, inject, effect } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { ExpenseRequest } from '../../models/expense.model';
+import { Expense, ExpenseRequest } from '../../models/expense.model';
 
 @Component({
   selector: 'app-expense-form',
@@ -9,7 +9,10 @@ import { ExpenseRequest } from '../../models/expense.model';
   styleUrl: './expense-form.css',
 })
 export class ExpenseForm {
+  editingExpense = input<Expense | null>(null);
   expenseSubmit = output<ExpenseRequest>();
+  expenseUpdate = output<{ id: string; request: ExpenseRequest }>();
+  cancelEdit = output<void>();
 
   private fb = inject(FormBuilder);
 
@@ -20,17 +23,44 @@ export class ExpenseForm {
     category: ['FIXED' as 'FIXED' | 'VARIABLE', Validators.required],
   });
 
+  constructor() {
+    effect(() => {
+      const expense = this.editingExpense();
+      if (expense) {
+        this.form.patchValue({
+          description: expense.description,
+          amount: expense.amount / 100, // centavos → reais para exibição
+          date: expense.date,
+          category: expense.category,
+        });
+      } else {
+        this.form.reset({ date: this.todayISO(), category: 'FIXED' });
+      }
+    });
+  }
+
   submit(): void {
     if (this.form.invalid) return;
 
     const { description, amount, date, category } = this.form.getRawValue();
-    this.expenseSubmit.emit({
+    const request: ExpenseRequest = {
       description: description!,
-      amount: Math.round(amount! * 100), // converte reais → centavos
+      amount: Math.round(amount! * 100), // reais → centavos
       date: date!,
       category: category!,
-    });
-    this.form.reset({ date: this.todayISO(), category: 'FIXED' });
+    };
+
+    const editing = this.editingExpense();
+    if (editing) {
+      this.expenseUpdate.emit({ id: editing.expenseId, request });
+    } else {
+      this.expenseSubmit.emit(request);
+      this.form.reset({ date: this.todayISO(), category: 'FIXED' });
+    }
+  }
+
+  onCancel(): void {
+    this.cancelEdit.emit();
   }
 
   private todayISO(): string {

@@ -44,7 +44,12 @@
     </select>
   </div>
 
-  <button type="submit" [disabled]="form.invalid" class="btn-submit">
-    Lançar gasto
-  </button>
+  <div class="form-actions">
+    <button type="submit" [disabled]="form.invalid" class="btn-submit">
+      {{ editingExpense() ? 'Salvar alterações' : 'Lançar gasto' }}
+    </button>
+    @if (editingExpense()) {
+      <button type="button" class="btn-cancel" (click)="onCancel()">Cancelar</button>
+    }
+  </div>
 </form>

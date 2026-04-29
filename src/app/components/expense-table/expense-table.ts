@@ -8,6 +8,7 @@ import { Expense } from '../../models/expense.model';
 })
 export class ExpenseTable {
   expenses = input.required<Expense[]>();
+  editExpense = output<Expense>();
   deleteExpense = output<string>();
 
   formatCents(cents: number): string {
@@ -24,6 +25,10 @@ export class ExpenseTable {
 
   formatCategory(category: string): string {
     return category === 'FIXED' ? 'Fixo' : 'Variável';
+  }
+
+  onEdit(expense: Expense): void {
+    this.editExpense.emit(expense);
   }
 
   onDelete(id: string): void {

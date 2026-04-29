@@ -9,8 +9,13 @@
 
   <main class="page-main">
     <section class="card">
-      <h2>Novo gasto</h2>
-      <app-expense-form (expenseSubmit)="onExpenseSubmit($event)" />
+      <h2>{{ editingExpense() ? 'Editar gasto' : 'Novo gasto' }}</h2>
+      <app-expense-form
+        [editingExpense]="editingExpense()"
+        (expenseSubmit)="onExpenseSubmit($event)"
+        (expenseUpdate)="onUpdateExpense($event)"
+        (cancelEdit)="onCancelEdit()"
+      />
     </section>
 
     <app-expense-summary [expenses]="expenses()" />
@@ -21,6 +26,7 @@
       } @else {
         <app-expense-table
           [expenses]="expenses()"
+          (editExpense)="onEditExpense($event)"
           (deleteExpense)="onDeleteExpense($event)"
         />
       }

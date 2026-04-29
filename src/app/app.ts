@@ -20,6 +20,7 @@ export class App implements OnInit {
   currentMonth = signal(this.todayYearMonth());
   expenses = signal<Expense[]>([]);
   loading = signal(false);
+  editingExpense = signal<Expense | null>(null);
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -36,6 +37,23 @@ export class App implements OnInit {
     this.expenseService.createExpense(request).subscribe({
       next: () => this.loadExpenses(),
     });
+  }
+
+  onEditExpense(expense: Expense): void {
+    this.editingExpense.set(expense);
+  }
+
+  onUpdateExpense(payload: { id: string; request: ExpenseRequest }): void {
+    this.expenseService.updateExpense(payload.id, payload.request).subscribe({
+      next: () => {
+        this.editingExpense.set(null);
+        this.loadExpenses();
+      },
+    });
+  }
+
+  onCancelEdit(): void {
+    this.editingExpense.set(null);
   }
 
   onDeleteExpense(id: string): void {

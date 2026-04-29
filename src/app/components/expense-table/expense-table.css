@@ -51,6 +51,27 @@
   color: #856404;
 }
 
+.actions {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: flex-end;
+}
+
+.btn-edit {
+  background: none;
+  border: none;
+  color: #adb5bd;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.btn-edit:hover {
+  color: #0d6efd;
+  background: #f0f4ff;
+}
+
 .btn-delete {
   background: none;
   border: none;

@@ -24,7 +24,12 @@
             >{{ formatCategory(expense.category) }}</span>
           </td>
           <td class="amount">{{ formatCents(expense.amount) }}</td>
-          <td>
+          <td class="actions">
+            <button
+              class="btn-edit"
+              (click)="onEdit(expense)"
+              aria-label="Editar gasto"
+            >&#x270E;</button>
             <button
               class="btn-delete"
               (click)="onDelete(expense.expenseId)"
