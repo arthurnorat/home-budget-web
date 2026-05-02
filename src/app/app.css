@@ -55,6 +55,6 @@
   }
 
   .card {
-    overflow-x: auto;
+    padding: 1rem;
   }
 }

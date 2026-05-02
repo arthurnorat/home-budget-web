@@ -93,6 +93,24 @@
   padding: 2rem;
 }
 
+@media (max-width: 600px) {
+  .expense-table {
+    font-size: 0.85rem;
+  }
+
+  .expense-table th,
+  .expense-table td {
+    padding: 0.6rem 0.4rem;
+  }
+
+  .expense-table td:first-child {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 .filter-bar {
   display: flex;
   gap: 0.5rem;
