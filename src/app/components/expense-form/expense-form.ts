@@ -1,10 +1,11 @@
 import { Component, output, input, inject, effect } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { Expense, ExpenseRequest } from '../../models/expense.model';
 
 @Component({
   selector: 'app-expense-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgxCurrencyDirective],
   templateUrl: './expense-form.html',
   styleUrl: './expense-form.css',
 })
