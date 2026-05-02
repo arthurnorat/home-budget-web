@@ -14,6 +14,7 @@
     [class.active]="categoryFilter() === 'ALL'"
     (click)="setFilter('ALL')"
   >Todos</button>
+  <button class="btn-import" (click)="onImportFixed()">Importar</button>
 </div>
 
 @if (filteredExpenses().length === 0) {

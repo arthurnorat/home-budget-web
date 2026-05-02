@@ -24,4 +24,8 @@ export class ExpenseService {
   deleteExpense(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  importFixed(month: string): Observable<Expense[]> {
+    return this.http.post<Expense[]>(`${this.apiUrl}/import-fixed`, null, { params: { month } });
+  }
 }

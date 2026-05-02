@@ -12,6 +12,7 @@ export class ExpenseTable {
   expenses = input.required<Expense[]>();
   editExpense = output<Expense>();
   deleteExpense = output<string>();
+  importFixed = output<void>();
 
   categoryFilter = signal<CategoryFilter>('VARIABLE');
 
@@ -47,5 +48,9 @@ export class ExpenseTable {
 
   onDelete(id: string): void {
     this.deleteExpense.emit(id);
+  }
+
+  onImportFixed(): void {
+    this.importFixed.emit();
   }
 }

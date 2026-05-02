@@ -62,6 +62,12 @@ export class App implements OnInit {
     });
   }
 
+  onImportFixed(): void {
+    this.expenseService.importFixed(this.currentMonth()).subscribe({
+      next: () => this.loadExpenses(),
+    });
+  }
+
   private loadExpenses(): void {
     this.loading.set(true);
     this.expenseService.getExpenses(this.currentMonth()).subscribe({

@@ -151,3 +151,21 @@
   border-color: #856404;
   color: #fff;
 }
+
+.btn-import {
+  margin-left: auto;
+  background: none;
+  border: 1px solid #0d6efd;
+  border-radius: 20px;
+  padding: 0.25rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #0d6efd;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-import:hover {
+  background: #0d6efd;
+  color: #fff;
+}
