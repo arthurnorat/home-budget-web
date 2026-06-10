@@ -1,16 +1,49 @@
 <div class="summary">
-  <div class="summary-total">
-    <span class="summary-label">Total do mês</span>
-    <span class="summary-value">{{ formatCents(total()) }}</span>
-  </div>
-  <div class="summary-categories">
-    <div class="summary-category">
-      <span class="summary-label">Fixo</span>
-      <span class="summary-value">{{ formatCents(totalFixed()) }}</span>
+  <div class="income-section">
+    <div class="income-input-row">
+      <span class="summary-label">Entrada do mês</span>
+      <input
+        type="text"
+        inputmode="numeric"
+        [ngModel]="incomeInputValue()"
+        (ngModelChange)="incomeInputValue.set($event)"
+        placeholder="0,00"
+        currencyMask
+        [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2, allowNegative: false, nullable: true }"
+        class="income-input"
+      />
+      <button (click)="onSaveIncome()" class="btn-save-income">Salvar</button>
     </div>
-    <div class="summary-category">
-      <span class="summary-label">Variável</span>
-      <span class="summary-value">{{ formatCents(totalVariable()) }}</span>
+    <div class="budget-targets">
+      <div class="summary-category">
+        <span class="summary-label">50% Fixo</span>
+        <span class="summary-value">{{ formatCents(budget50()) }}</span>
+      </div>
+      <div class="summary-category">
+        <span class="summary-label">30% Variável</span>
+        <span class="summary-value">{{ formatCents(budget30()) }}</span>
+      </div>
+      <div class="summary-category">
+        <span class="summary-label">20% Investimentos</span>
+        <span class="summary-value">{{ formatCents(budget20()) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-totals">
+    <div class="summary-total">
+      <span class="summary-label">Total do mês</span>
+      <span class="summary-value">{{ formatCents(total()) }}</span>
+    </div>
+    <div class="summary-categories">
+      <div class="summary-category">
+        <span class="summary-label">Fixo</span>
+        <span class="summary-value">{{ formatCents(totalFixed()) }}</span>
+      </div>
+      <div class="summary-category">
+        <span class="summary-label">Variável</span>
+        <span class="summary-value">{{ formatCents(totalVariable()) }}</span>
+      </div>
     </div>
   </div>
 </div>

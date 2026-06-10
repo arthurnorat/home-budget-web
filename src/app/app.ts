@@ -1,6 +1,8 @@
 import { Component, signal, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { forkJoin } from 'rxjs';
 import { ExpenseService } from './services/expense.service';
+import { IncomeService } from './services/income.service';
 import { Expense, ExpenseRequest } from './models/expense.model';
 import { MonthNavigator } from './components/month-navigator/month-navigator';
 import { ExpenseForm } from './components/expense-form/expense-form';
@@ -15,22 +17,24 @@ import { ExpenseTable } from './components/expense-table/expense-table';
 })
 export class App implements OnInit {
   private expenseService = inject(ExpenseService);
+  private incomeService = inject(IncomeService);
   private platformId = inject(PLATFORM_ID);
 
   currentMonth = signal(this.todayYearMonth());
   expenses = signal<Expense[]>([]);
+  income = signal<number>(0);
   loading = signal(false);
   editingExpense = signal<Expense | null>(null);
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.loadExpenses();
+      this.loadAll();
     }
   }
 
   onMonthChange(month: string): void {
     this.currentMonth.set(month);
-    this.loadExpenses();
+    this.loadAll();
   }
 
   onExpenseSubmit(request: ExpenseRequest): void {
@@ -65,6 +69,28 @@ export class App implements OnInit {
   onImportFixed(): void {
     this.expenseService.importFixed(this.currentMonth()).subscribe({
       next: () => this.loadExpenses(),
+    });
+  }
+
+  onSaveIncome(amountCents: number): void {
+    this.incomeService.saveIncome(this.currentMonth(), amountCents).subscribe({
+      next: (response) => this.income.set(response.amount),
+    });
+  }
+
+  private loadAll(): void {
+    this.loading.set(true);
+    const month = this.currentMonth();
+    forkJoin({
+      expenses: this.expenseService.getExpenses(month),
+      income: this.incomeService.getIncome(month),
+    }).subscribe({
+      next: ({ expenses, income }) => {
+        this.expenses.set(expenses);
+        this.income.set(income.amount);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false),
     });
   }
 

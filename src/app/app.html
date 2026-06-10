@@ -18,7 +18,11 @@
       />
     </section>
 
-    <app-expense-summary [expenses]="expenses()" />
+    <app-expense-summary
+      [expenses]="expenses()"
+      [income]="income()"
+      (incomeChange)="onSaveIncome($event)"
+    />
 
     <section class="card">
       @if (loading()) {
