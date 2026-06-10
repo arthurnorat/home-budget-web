@@ -1,5 +1,10 @@
 <div class="filter-bar">
   <button
+    class="btn-filter"
+    [class.active]="categoryFilter() === 'ALL'"
+    (click)="setFilter('ALL')"
+  >Todos</button>
+  <button
     class="btn-filter btn-filter-variable"
     [class.active]="categoryFilter() === 'VARIABLE'"
     (click)="setFilter('VARIABLE')"
@@ -8,12 +13,7 @@
     class="btn-filter btn-filter-fixed"
     [class.active]="categoryFilter() === 'FIXED'"
     (click)="setFilter('FIXED')"
-  >Fixo</button>
-  <button
-    class="btn-filter"
-    [class.active]="categoryFilter() === 'ALL'"
-    (click)="setFilter('ALL')"
-  >Todos</button>
+  >Fixo</button>  
   <button class="btn-import" (click)="onImportFixed()">Importar</button>
 </div>
 

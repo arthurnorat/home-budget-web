@@ -21,7 +21,7 @@ export class ExpenseForm {
     description: ['', [Validators.required, Validators.minLength(2)]],
     amount: [null as number | null, [Validators.required, Validators.min(0.01)]],
     date: [this.todayISO(), Validators.required],
-    category: ['FIXED' as 'FIXED' | 'VARIABLE', Validators.required],
+    category: ['VARIABLE' as 'FIXED' | 'VARIABLE', Validators.required],
   });
 
   constructor() {
@@ -35,7 +35,7 @@ export class ExpenseForm {
           category: expense.category,
         });
       } else {
-        this.form.reset({ date: this.todayISO(), category: 'FIXED' });
+        this.form.reset({ date: this.todayISO(), category: 'VARIABLE' });
       }
     });
   }
@@ -56,7 +56,7 @@ export class ExpenseForm {
       this.expenseUpdate.emit({ id: editing.expenseId, request });
     } else {
       this.expenseSubmit.emit(request);
-      this.form.reset({ date: this.todayISO(), category: 'FIXED' });
+      this.form.reset({ date: this.todayISO(), category: 'VARIABLE' });
     }
   }
 

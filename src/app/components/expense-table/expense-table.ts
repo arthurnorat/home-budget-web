@@ -14,7 +14,7 @@ export class ExpenseTable {
   deleteExpense = output<string>();
   importFixed = output<void>();
 
-  categoryFilter = signal<CategoryFilter>('VARIABLE');
+  categoryFilter = signal<CategoryFilter>('ALL');
 
   filteredExpenses = computed(() => {
     const filter = this.categoryFilter();
