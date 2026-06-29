@@ -13,8 +13,15 @@
     class="btn-filter btn-filter-fixed"
     [class.active]="categoryFilter() === 'FIXED'"
     (click)="setFilter('FIXED')"
-  >Fixo</button>  
-  <button class="btn-import" (click)="onImportFixed()">Importar</button>
+  >Fixo</button>
+  <div class="btn-group-right">
+    <button
+      class="btn-consolidate"
+      [disabled]="!canConsolidate()"
+      (click)="onConsolidateClick()"
+    >Consolidar</button>
+    <button class="btn-import" (click)="onImportFixed()">Importar</button>
+  </div>
 </div>
 
 @if (filteredExpenses().length === 0) {
@@ -23,6 +30,7 @@
   <table class="expense-table">
     <thead>
       <tr>
+        <th class="col-check"></th>
         <th>Descrição</th>
         <th>Data</th>
         <th>Valor</th>
@@ -31,7 +39,15 @@
     </thead>
     <tbody>
       @for (expense of filteredExpenses(); track expense.expenseId) {
-        <tr>
+        <tr [class.selected]="isSelected(expense.expenseId)">
+          <td class="col-check">
+            <input
+              type="checkbox"
+              [checked]="isSelected(expense.expenseId)"
+              (change)="toggleSelection(expense.expenseId)"
+              aria-label="Selecionar gasto"
+            />
+          </td>
           <td>{{ expense.description }}</td>
           <td>{{ formatDate(expense.date) }}</td>
           <td class="amount">{{ formatCents(expense.amount) }}</td>
@@ -52,3 +68,26 @@
     </tbody>
   </table>
 }
+
+<dialog #consolidateDialog (close)="onClearConsolidateData()">
+  @if (consolidateData(); as data) {
+    <h3 class="dialog-title">Consolidar gastos</h3>
+    <div class="dialog-field">
+      <label for="consolidate-desc">Descrição</label>
+      <input
+        id="consolidate-desc"
+        #descInput
+        type="text"
+        [value]="data.description"
+      />
+    </div>
+    <div class="dialog-field">
+      <label>Valor total</label>
+      <span class="dialog-total">{{ formatCents(data.amount) }}</span>
+    </div>
+    <div class="dialog-actions">
+      <button class="btn-dialog-cancel" (click)="onConsolidateCancel()">Cancelar</button>
+      <button class="btn-dialog-confirm" (click)="onConsolidateConfirm(descInput.value)">Confirmar</button>
+    </div>
+  }
+</dialog>

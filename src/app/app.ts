@@ -72,6 +72,17 @@ export class App implements OnInit {
     });
   }
 
+  onConsolidate(event: { idsToDelete: string[]; newExpense: ExpenseRequest }): void {
+    const deletes$ = event.idsToDelete.map(id => this.expenseService.deleteExpense(id));
+    forkJoin(deletes$).subscribe({
+      next: () => {
+        this.expenseService.createExpense(event.newExpense).subscribe({
+          next: () => this.loadExpenses(),
+        });
+      },
+    });
+  }
+
   onSaveIncome(amountCents: number): void {
     this.incomeService.saveIncome(this.currentMonth(), amountCents).subscribe({
       next: (response) => this.income.set(response.amount),

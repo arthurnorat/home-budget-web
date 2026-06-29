@@ -28,6 +28,28 @@
   background: #f8f9fa;
 }
 
+.expense-table tr.selected td {
+  background: #eef4ff;
+}
+
+.expense-table tr.selected:hover td {
+  background: #e4edff;
+}
+
+.col-check {
+  width: 40px;
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0;
+}
+
+.col-check input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: #0d6efd;
+  width: 15px;
+  height: 15px;
+}
+
 .amount {
   font-weight: 600;
   text-align: right;
@@ -103,7 +125,7 @@
     padding: 0.6rem 0.4rem;
   }
 
-  .expense-table td:first-child {
+  .expense-table td:nth-child(2) {
     max-width: 130px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -115,6 +137,7 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  align-items: center;
 }
 
 .btn-filter {
@@ -152,8 +175,35 @@
   color: #fff;
 }
 
-.btn-import {
+.btn-group-right {
   margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-consolidate {
+  background: none;
+  border: 1px solid #6c757d;
+  border-radius: 20px;
+  padding: 0.25rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6c757d;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-consolidate:not(:disabled):hover {
+  background: #6c757d;
+  color: #fff;
+}
+
+.btn-consolidate:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-import {
   background: none;
   border: 1px solid #0d6efd;
   border-radius: 20px;
@@ -168,4 +218,96 @@
 .btn-import:hover {
   background: #0d6efd;
   color: #fff;
+}
+
+/* Dialog */
+
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  min-width: 320px;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dialog-title {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.dialog-field label {
+  font-size: 0.78rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dialog-field input[type="text"] {
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  color: #212529;
+}
+
+.dialog-field input[type="text"]:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+}
+
+.dialog-total {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.btn-dialog-cancel {
+  background: none;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #6c757d;
+  transition: background 0.15s;
+}
+
+.btn-dialog-cancel:hover {
+  background: #f8f9fa;
+}
+
+.btn-dialog-confirm {
+  background: #212529;
+  border: 1px solid #212529;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.btn-dialog-confirm:hover {
+  background: #000;
 }
