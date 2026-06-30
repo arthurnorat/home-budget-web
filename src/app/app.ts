@@ -73,10 +73,10 @@ export class App implements OnInit {
   }
 
   onConsolidate(event: { idsToDelete: string[]; newExpense: ExpenseRequest }): void {
-    const deletes$ = event.idsToDelete.map(id => this.expenseService.deleteExpense(id));
-    forkJoin(deletes$).subscribe({
+    this.expenseService.createExpense(event.newExpense).subscribe({
       next: () => {
-        this.expenseService.createExpense(event.newExpense).subscribe({
+        const deletes$ = event.idsToDelete.map(id => this.expenseService.deleteExpense(id));
+        forkJoin(deletes$).subscribe({
           next: () => this.loadExpenses(),
         });
       },
