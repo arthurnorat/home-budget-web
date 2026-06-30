@@ -44,6 +44,25 @@
   padding: 1rem;
 }
 
+.edit-dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  width: min(580px, 90vw);
+}
+
+.edit-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dialog-edit-title {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #212529;
+}
+
 @media (max-width: 600px) {
   .page {
     padding: 1rem;
