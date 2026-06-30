@@ -1,4 +1,4 @@
-import { Component, signal, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, signal, inject, OnInit, PLATFORM_ID, viewChild, ElementRef, effect } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import { ExpenseService } from './services/expense.service';
@@ -25,6 +25,21 @@ export class App implements OnInit {
   income = signal<number>(0);
   loading = signal(false);
   editingExpense = signal<Expense | null>(null);
+
+  editDialogRef = viewChild<ElementRef<HTMLDialogElement>>('editDialog');
+
+  constructor() {
+    effect(() => {
+      const expense = this.editingExpense();
+      const dialog = this.editDialogRef()?.nativeElement;
+      if (!dialog) return;
+      if (expense) {
+        dialog.showModal();
+      } else if (dialog.open) {
+        dialog.close();
+      }
+    });
+  }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {

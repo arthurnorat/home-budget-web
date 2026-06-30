@@ -9,14 +9,20 @@
 
   <main class="page-main">
     <section class="card">
-      <h2>{{ editingExpense() ? 'Editar gasto' : 'Novo gasto' }}</h2>
+      <h2>Novo gasto</h2>
+      <app-expense-form
+        (expenseSubmit)="onExpenseSubmit($event)"
+      />
+    </section>
+
+    <dialog #editDialog class="edit-dialog" (close)="onCancelEdit()">
+      <h3 class="dialog-edit-title">Editar gasto</h3>
       <app-expense-form
         [editingExpense]="editingExpense()"
-        (expenseSubmit)="onExpenseSubmit($event)"
         (expenseUpdate)="onUpdateExpense($event)"
         (cancelEdit)="onCancelEdit()"
       />
-    </section>
+    </dialog>
 
     <app-expense-summary
       [expenses]="expenses()"

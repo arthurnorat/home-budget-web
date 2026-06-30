@@ -1,3 +1,24 @@
+/* Estilos do formulário dentro do dialog de edição */
+dialog.edit-dialog .expense-form {
+  grid-template-columns: 1fr !important;
+}
+
+dialog.edit-dialog .form-actions {
+  flex-direction: row !important;
+  justify-content: flex-end;
+  grid-column: 1;
+}
+
+dialog.edit-dialog .btn-submit {
+  background: #212529 !important;
+  border-color: #212529 !important;
+}
+
+dialog.edit-dialog .btn-submit:hover:not(:disabled) {
+  background: #000 !important;
+  border-color: #000 !important;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
