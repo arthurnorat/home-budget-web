@@ -81,12 +81,6 @@ export class App implements OnInit {
     });
   }
 
-  onImportFixed(): void {
-    this.expenseService.importFixed(this.currentMonth()).subscribe({
-      next: () => this.loadExpenses(),
-    });
-  }
-
   onConsolidate(event: { idsToDelete: string[]; newExpense: ExpenseRequest }): void {
     this.expenseService.createExpense(event.newExpense).subscribe({
       next: () => {

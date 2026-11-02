@@ -19,7 +19,6 @@ export class ExpenseTable {
   expenses = input.required<Expense[]>();
   editExpense = output<Expense>();
   deleteExpense = output<string>();
-  importFixed = output<void>();
   consolidateExpenses = output<{ idsToDelete: string[]; newExpense: ExpenseRequest }>();
 
   categoryFilter = signal<CategoryFilter>('ALL');
@@ -113,9 +112,5 @@ export class ExpenseTable {
 
   onDelete(id: string): void {
     this.deleteExpense.emit(id);
-  }
-
-  onImportFixed(): void {
-    this.importFixed.emit();
   }
 }
